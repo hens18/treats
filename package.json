@@ -1,0 +1,14 @@
+{
+  "name": "treats-dipped-by-jay",
+  "private": true,
+  "description": "Site for Treats Dipped by Jay. site/ is plain HTML/CSS/JS; only the 3D strawberry is bundled.",
+  "scripts": {
+    "build:3d": "esbuild src/strawberry.js --bundle --format=esm --minify --target=es2020 --legal-comments=none --outfile=site/assets/strawberry3d.js",
+    "preview": "node scripts/build-preview.js",
+    "preview:artifact": "node scripts/build-preview.js --artifact"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.0",
+    "three": "^0.186.1"
+  }
+}

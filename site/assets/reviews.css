@@ -1,0 +1,83 @@
+/* Review belt on the chocolate band. Same component as hens18/hwest; tokens come from site.css. */
+.reviews{position:relative;background:var(--cocoa-deep);color:var(--on-deep);--card-w:min(370px,82vw);padding-bottom:clamp(48px,7vw,84px)}
+.reviews__head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px 32px;padding-top:clamp(56px,8vw,96px);margin-bottom:30px}
+.reviews .h2{color:var(--on-deep)}
+.reviews__intro{min-width:0}
+.reviews__intro p:not(.eyebrow){color:var(--on-deep-muted);margin-top:12px;max-width:52ch}
+
+.belt__controls{display:flex;align-items:center;gap:8px}
+.icon-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-width:44px;height:44px;padding:0 12px;border-radius:999px;
+  border:1.5px solid rgba(255,241,245,.36);background:transparent;color:var(--on-deep);cursor:pointer;font:700 .9rem/1 var(--f-body);
+  transition:border-color .25s ease,background-color .25s ease}
+.icon-btn:hover{border-color:var(--on-deep);background:rgba(255,241,245,.1)}
+.icon-btn:focus-visible{outline-color:var(--frost)}
+.icon-btn svg{width:18px;height:18px}
+.icon-btn--text{padding:0 16px 0 14px}
+.icon-btn .i-play,.icon-btn[aria-pressed="true"] .i-pause{display:none}
+.icon-btn[aria-pressed="true"] .i-play{display:block}
+
+.belt{position:relative;overflow:hidden;touch-action:pan-y;cursor:grab;-webkit-user-select:none;user-select:none;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
+.belt.is-dragging{cursor:grabbing}
+.belt.is-dragging .rv{transition:none}
+.belt__track{display:flex;gap:20px;width:max-content;padding:14px 0 44px;margin-bottom:-34px;align-items:stretch;will-change:transform}
+.belt__track.has-open{align-items:flex-start}
+
+.rv{flex:0 0 var(--card-w);width:var(--card-w);display:flex;flex-direction:column;padding:26px;border-radius:22px;background:var(--vanilla);color:var(--ink);
+  cursor:pointer;transition:opacity .45s ease,box-shadow .45s ease,transform .6s var(--ease-out)}
+.rv:hover{transform:translateY(-3px)}
+.has-open .rv:not(.is-open){opacity:.42}
+.rv.is-open{cursor:default;transform:none;box-shadow:0 0 0 3px var(--hot),0 26px 50px -22px rgba(0,0,0,.6)}
+.rv__head{display:flex;align-items:center;gap:12px}
+.rv__mono{flex:none;display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--frost);color:var(--cocoa);font:400 .95rem/1 var(--f-display)}
+.rv__who{min-width:0}
+.rv__name{font:700 1.04rem/1.25 var(--f-body);color:var(--cocoa)}
+.rv__place{font-size:.88rem;color:var(--muted);margin-top:2px}
+.rv__meta{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;margin-top:16px;font-size:.88rem;color:var(--muted)}
+.stars{display:inline-flex;gap:2px}
+.star{--fill:100%;width:15px;height:15px;background:linear-gradient(90deg,var(--hot) var(--fill),rgba(91,42,18,.16) var(--fill));
+  clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)}
+.rv__quote{margin:14px 0 0;flex:1}
+.rv__pull{font:400 1.22rem/1.3 var(--f-display);color:var(--cocoa);margin-bottom:10px}
+.rv__body{font-size:.98rem;line-height:1.6;color:var(--muted);display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:4;overflow:hidden}
+.rv__body p+p{margin-top:.8em}
+.rv.is-open .rv__body{display:block;overflow:visible}
+.rv__photos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:16px}
+.rv__photo{display:block;padding:0;border:0;border-radius:10px;overflow:hidden;aspect-ratio:4/3;background:var(--frost-soft);cursor:zoom-in}
+.rv__photo img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease-out);pointer-events:none}
+.rv__photo:hover img{transform:scale(1.07)}
+.rv__more{align-self:flex-start;min-height:44px;margin-top:10px;padding:0;border:0;background:none;cursor:pointer;
+  font:700 .94rem/1 var(--f-body);color:var(--hot-ink);text-decoration:underline;text-underline-offset:4px}
+.rv__more:hover{color:var(--cocoa)}
+
+/* Slots waiting for real reviews: outlined, so nobody mistakes them for one. */
+.rv--slot{background:transparent;color:var(--on-deep);border:2px dashed rgba(255,241,245,.4)}
+.rv--slot .rv__mono{background:transparent;border:2px dashed rgba(255,241,245,.5);color:var(--on-deep)}
+.rv--slot .rv__name,.rv--slot .rv__pull{color:var(--on-deep)}
+.rv--slot .rv__place{color:var(--frost)}
+.rv--slot .rv__body{color:var(--on-deep-muted)}
+.rv--slot .rv__more{color:var(--frost)}
+.rv--slot .rv__more:hover{color:var(--on-deep)}
+.rv--slot.is-open{box-shadow:0 0 0 3px var(--frost)}
+
+/* The Instagram card and the press card */
+.rv--social,.rv--press{justify-content:space-between;gap:26px;cursor:default}
+.rv--social:hover,.rv--press:hover{transform:none}
+.rv--social{background:var(--hot);color:var(--white)}
+.rv__score{font:400 4.8rem/.9 var(--f-display);color:var(--white);letter-spacing:-.02em}
+.rv__score-note{margin-top:12px;color:rgba(255,255,255,.88);font-size:1rem;max-width:22ch}
+.rv__links{display:flex;flex-direction:column;gap:8px}
+.rv__link{display:flex;align-items:center;justify-content:space-between;min-height:46px;padding:0 18px;border-radius:999px;border:1.5px solid rgba(255,255,255,.55);
+  color:var(--white);text-decoration:none;font-weight:700;font-size:.94rem;transition:background-color .25s ease,border-color .25s ease}
+.rv__link:hover{background:rgba(255,255,255,.14);border-color:var(--white);color:var(--white)}
+.rv--press{background:var(--frost);color:var(--cocoa)}
+.rv__press-outlet{font:400 .72rem/1.3 var(--f-display);letter-spacing:.16em;text-transform:uppercase;color:var(--hot-ink)}
+.rv__press-head{margin-top:14px;font:400 1.55rem/1.15 var(--f-display);color:var(--cocoa)}
+.rv__press-date{display:block;margin-top:12px;color:var(--muted);font-size:.9rem}
+.rv__link--dark{color:var(--cocoa);border-color:rgba(91,42,18,.4)}
+.rv__link--dark:hover{background:var(--cocoa);border-color:var(--cocoa);color:var(--vanilla)}
+
+@media (prefers-reduced-motion:reduce){
+  [data-belt-pause]{display:none}
+  .rv:hover{transform:none}
+}
