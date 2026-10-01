@@ -289,6 +289,7 @@ const SOCIAL = {
   /* ---------- Lightbox for review photos ---------- */
   const showPhoto = btn => {
     if (!lightbox || typeof lightbox.showModal !== "function") return;
+    lightbox.dataset.mode = "photo";
     lightbox.querySelector("[data-lightbox-img]").src = btn.dataset.src;
     lightbox.querySelector("[data-lightbox-img]").alt = btn.getAttribute("aria-label").replace(/^View photo: /, "");
     lightbox.querySelector("[data-lightbox-cap]").textContent = btn.dataset.caption;

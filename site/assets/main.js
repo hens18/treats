@@ -146,15 +146,15 @@
     const ways = [];
     menu.querySelectorAll(".item").forEach(item => {
       let hit = false;
-      item.querySelectorAll(".flavor-list [data-flavor]").forEach(li => {
-        const m = !!flavor && li.dataset.flavor === flavor;
-        li.classList.toggle("is-match", m);
+      item.querySelectorAll("[data-flavor]").forEach(el => {
+        const m = !!flavor && el.dataset.flavor === flavor;
+        el.classList.toggle("is-match", m);
         hit = hit || m;
       });
+      item.querySelectorAll(".tile, .cookie, .shelf__more").forEach(t => t.classList.toggle("is-dim", !!flavor && t.dataset.flavor !== flavor));
       item.classList.toggle("is-dim", !!flavor && !hit);
       if (hit) ways.push(item.dataset.item);
     });
-    menu.querySelectorAll(".cookie").forEach(ck => ck.classList.toggle("is-dim", !!flavor && ck.dataset.flavor !== flavor));
     if (!note) return;
     if (!flavor) { note.textContent = defaultNote; return; }
     const name = [...chips].find(ch => ch.dataset.flavorPick === flavor).textContent;
@@ -170,19 +170,78 @@
     ck.setAttribute("aria-pressed", String(ck.getAttribute("aria-pressed") !== "true"));
   }));
 
-  /* ---------- Lightbox: the printed menu (review photos use it too) ---------- */
+  /* ---------- Cups or cones: every tile turns over to the other one ---------- */
+  const cups = document.querySelector(".item--cups");
+  if (cups) {
+    const btns = cups.querySelectorAll("[data-shape-pick]");
+    const price = cups.querySelector("[data-shape-price]");
+    btns.forEach(btn => btn.addEventListener("click", () => {
+      const shape = btn.dataset.shapePick;
+      cups.dataset.shape = shape;
+      btns.forEach(x => {
+        const on = x === btn;
+        x.classList.toggle("is-on", on);
+        x.setAttribute("aria-pressed", String(on));
+      });
+      price.textContent = shape === "cone" ? "$13" : "$12";
+    }));
+  }
+
+  /* ---------- The headshot leans toward the pointer ---------- */
+  const tilt = document.querySelector("[data-tilt]");
+  if (tilt && matchMedia("(hover: hover) and (pointer: fine)").matches) {
+    tilt.addEventListener("pointermove", e => {
+      if (reduced.matches) return;
+      const r = tilt.getBoundingClientRect();
+      tilt.style.setProperty("--ry", `${((e.clientX - r.left) / r.width - 0.5) * 12}deg`);
+      tilt.style.setProperty("--rx", `${-((e.clientY - r.top) / r.height - 0.5) * 9}deg`);
+    });
+    tilt.addEventListener("pointerleave", () => { tilt.style.setProperty("--ry", "0deg"); tilt.style.setProperty("--rx", "0deg"); });
+  }
+
+  /* ---------- Lightbox: the menu boards as a gallery (review photos use it one at a time) ---------- */
+  const BOARDS = [
+    { src: "assets/img/board-menu.webp", cap: "Treats Menu", alt: "The Treats Menu board: bestsellers, cheesecake cups, dipped slices, cookies and specialty items with prices" },
+    { src: "assets/img/board-cups.webp", cap: "Cheesecake Cups or Cones", alt: "Cheesecake Cups or Cones board: Biscoff, Fruity Pebbles, Oreo, Banana Pudding and Strawberry Crunch, $12 a cup and $1 more for a cone" },
+    { src: "assets/img/board-slices.webp", cap: "Dipped Cheesecake Slices", alt: "Dipped Cheesecake Slices board: banana pudding, Fruity Pebbles, red velvet, Oreo, strawberry crunch and Biscoff, $10" },
+    { src: "assets/img/board-cookies.webp", cap: "$4 Gourmet Cookies", alt: "$4 Gourmet Cookies board: eleven cookies with what's in each one" },
+    { src: "assets/img/board-specialty.webp", cap: "Specialty Items", alt: "Specialty Items board: candied grapes, churro cheesecake, chocolate covered and stuffed cheesecake strawberries, cupcakes, ice cream, apple salad and dipped apple slices with prices" }
+  ];
   const lightbox = document.querySelector("[data-lightbox]");
   if (lightbox) {
+    const img = lightbox.querySelector("[data-lightbox-img]");
+    const cap = lightbox.querySelector("[data-lightbox-cap]");
+    let at = 0;
+    const show = i => {
+      at = (i + BOARDS.length) % BOARDS.length;
+      img.src = BOARDS[at].src;
+      img.alt = BOARDS[at].alt;
+      cap.textContent = `${BOARDS[at].cap} · ${at + 1} of ${BOARDS.length}`;
+    };
     lightbox.querySelector("[data-lightbox-close]").addEventListener("click", () => lightbox.close());
     lightbox.addEventListener("click", e => { if (e.target === lightbox) lightbox.close(); });
-    const showMenu = document.querySelector("[data-show-menu]");
-    if (showMenu) showMenu.addEventListener("click", () => {
-      if (typeof lightbox.showModal !== "function") { window.open("assets/img/printed-menu.webp", "_blank"); return; }
-      const img = lightbox.querySelector("[data-lightbox-img]");
-      img.src = "assets/img/printed-menu.webp";
-      img.alt = "The printed Treats Menu: bestsellers, cheesecake cups, dipped slices, cookies and specialty items with prices";
-      lightbox.querySelector("[data-lightbox-cap]").textContent = "The menu on the truck.";
-      lightbox.showModal();
+    lightbox.querySelector("[data-lightbox-prev]").addEventListener("click", () => show(at - 1));
+    lightbox.querySelector("[data-lightbox-next]").addEventListener("click", () => show(at + 1));
+    lightbox.addEventListener("keydown", e => {
+      if (lightbox.dataset.mode !== "boards") return;
+      if (e.key === "ArrowRight") show(at + 1);
+      if (e.key === "ArrowLeft") show(at - 1);
     });
+    // Swipe between boards on touch screens.
+    let sx = null;
+    img.addEventListener("pointerdown", e => { sx = e.clientX; });
+    img.addEventListener("pointerup", e => {
+      if (sx === null || lightbox.dataset.mode !== "boards") return;
+      const dx = e.clientX - sx;
+      sx = null;
+      if (Math.abs(dx) > 40) show(at + (dx < 0 ? 1 : -1));
+    });
+    document.querySelectorAll("[data-board-open]").forEach(btn => btn.addEventListener("click", () => {
+      const i = +btn.dataset.boardOpen;
+      if (typeof lightbox.showModal !== "function") { window.open(BOARDS[i].src, "_blank"); return; }
+      lightbox.dataset.mode = "boards";
+      show(i);
+      lightbox.showModal();
+    }));
   }
 })();

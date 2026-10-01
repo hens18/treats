@@ -49,6 +49,7 @@
       </a>
       <nav class="nav__links" aria-label="Main">
         <a href="#menu">Menu</a>
+        <a href="#about">About</a>
         <a href="#videos">Videos</a>
         <a href="#reviews">Reviews</a>
         <a href="#visit">Hours</a>
@@ -123,11 +124,11 @@
           <div class="menu__intro">
             <p class="eyebrow eyebrow--spaced">Treats menu</p>
             <h2 class="h2" id="menu-title">Pick your treat, then pick your flavor</h2>
-            <p class="lead">Prices are from the menu on the truck. Tap a flavor to see every way you can get it.</p>
+            <p class="lead">Prices are from the menu boards on the truck. Tap a flavor to see every way you can get it.</p>
           </div>
-          <button class="btn btn--line" type="button" data-show-menu>
+          <button class="btn btn--line" type="button" data-board-open="0">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg>
-            See the printed menu
+            See the menu boards
           </button>
         </header>
 
@@ -142,107 +143,157 @@
             <button class="chip" type="button" data-flavor-pick="fruity-pebbles" aria-pressed="false">Fruity Pebbles</button>
             <button class="chip" type="button" data-flavor-pick="red-velvet" aria-pressed="false">Red Velvet</button>
           </div>
-          <p class="flavors__note" aria-live="polite" data-flavor-note>Seven treats, a dozen cookies, and toppings to mix and match.</p>
+          <p class="flavors__note" aria-live="polite" data-flavor-note>Cheesecake by the cup, the cone and the slice, eleven cookies, and specialty treats.</p>
         </div>
 
         <div class="menu__grid" data-menu>
-          <article class="item item--cups" data-item="Cheesecake Cups">
+          <article class="item item--cups" data-item="Cheesecake Cups" data-shape="cup">
             <div class="item__top">
               <div>
                 <p class="item__tag">Bestseller</p>
-                <h3 class="item__name">Cheesecake Cups</h3>
+                <h3 class="item__name">Cheesecake Cups <span class="item__or">or Cones</span></h3>
               </div>
-              <span class="burst" aria-label="$12"><span class="burst__price">$12</span></span>
+              <span class="burst" aria-hidden="true"><span class="burst__price" data-shape-price>$12</span></span>
             </div>
-            <p class="item__desc">A 12 oz cup filled with our homemade cheesecake, layered with strawberries and your choice of topping. Or put it in a cone for $13.</p>
-            <p class="item__sub">Flavors</p>
-            <ul class="flavor-list">
-              <li data-flavor="biscoff">Biscoff</li>
-              <li data-flavor="strawberry-crunch">Strawberry Crunch</li>
-              <li data-flavor="banana-pudding">Banana Pudding</li>
-              <li data-flavor="oreo">Oreo</li>
-              <li data-flavor="fruity-pebbles">Fruity Pebbles</li>
-              <li>Graham Cracker</li>
-              <li>Caramel Apple Pecan</li>
+            <div class="item__intro">
+              <p class="item__desc">A 12 oz cup filled with our famous homemade cheesecake, layered with strawberries and your choice of topping. Make it a cone for $1 more.</p>
+              <div class="shape" role="group" aria-label="Show cups or cones">
+                <button class="shape__btn is-on" type="button" data-shape-pick="cup" aria-pressed="true">Cup <b>$12</b></button>
+                <button class="shape__btn" type="button" data-shape-pick="cone" aria-pressed="false">Cone <b>$13</b></button>
+              </div>
+            </div>
+            <ul class="tiles tiles--cups">
+              <li class="tile" data-flavor="biscoff" style="--i:0">
+                <div class="tile__flip">
+                  <img class="tile__cup" src="assets/img/cup-biscoff.webp" width="129" height="210" loading="lazy" alt="">
+                  <img class="tile__cone" src="assets/img/cone-biscoff.webp" width="107" height="227" loading="lazy" alt="">
+                </div>
+                <h4 class="tile__name">Biscoff</h4>
+                <p class="tile__desc">Crushed Biscoff cookies and cookie butter drizzle, with or without strawberries.</p>
+              </li>
+              <li class="tile" data-flavor="fruity-pebbles" style="--i:1">
+                <div class="tile__flip">
+                  <img class="tile__cup" src="assets/img/cup-fruity-pebbles.webp" width="129" height="208" loading="lazy" alt="">
+                  <img class="tile__cone" src="assets/img/cone-fruity-pebbles.webp" width="110" height="226" loading="lazy" alt="">
+                </div>
+                <h4 class="tile__name">Fruity Pebbles</h4>
+                <p class="tile__desc">Fruity Pebbles, strawberries and a little strawberry drizzle.</p>
+              </li>
+              <li class="tile" data-flavor="oreo" style="--i:2">
+                <div class="tile__flip">
+                  <img class="tile__cup" src="assets/img/cup-oreo.webp" width="123" height="233" loading="lazy" alt="">
+                  <img class="tile__cone" src="assets/img/cone-oreo.webp" width="114" height="231" loading="lazy" alt="">
+                </div>
+                <h4 class="tile__name">Oreo</h4>
+                <p class="tile__desc">Crushed Oreos layered with strawberries and creamy cheesecake.</p>
+              </li>
+              <li class="tile" data-flavor="banana-pudding" style="--i:3">
+                <div class="tile__flip">
+                  <img class="tile__cup" src="assets/img/cup-banana-pudding.webp" width="157" height="213" loading="lazy" alt="">
+                  <img class="tile__cone" src="assets/img/cone-banana-pudding.webp" width="116" height="242" loading="lazy" alt="">
+                </div>
+                <h4 class="tile__name">Banana Pudding</h4>
+                <p class="tile__desc">Crushed vanilla wafers, layered with creamy cheesecake and banana pudding.</p>
+              </li>
+              <li class="tile" data-flavor="strawberry-crunch" style="--i:4">
+                <div class="tile__flip">
+                  <img class="tile__cup" src="assets/img/cup-strawberry-crunch.webp" width="142" height="214" loading="lazy" alt="">
+                  <img class="tile__cone" src="assets/img/cone-strawberry-crunch.webp" width="102" height="226" loading="lazy" alt="">
+                </div>
+                <h4 class="tile__name">Strawberry Crunch</h4>
+                <p class="tile__desc">Our homemade strawberry crunch, layered with fresh strawberries.</p>
+              </li>
             </ul>
-            <p class="item__foot">Customize it your way. Sweet and creamy from the first bite to the last.</p>
+            <p class="item__also"><span class="item__sub">Also</span> Graham Cracker · Caramel Apple Pecan</p>
           </article>
 
           <article class="item item--slices" data-item="Dipped Slices">
             <div class="item__top">
               <div>
                 <p class="item__tag">The namesake</p>
-                <h3 class="item__name">Dipped Slices</h3>
+                <h3 class="item__name">Dipped Cheesecake Slices</h3>
               </div>
               <span class="burst" aria-label="$10"><span class="burst__price">$10</span></span>
             </div>
             <p class="item__desc">Thick cheesecake slices dipped in rich white chocolate, then rolled in your choice of topping. One bite, and you're hooked.</p>
-            <p class="item__sub">Coatings</p>
-            <ul class="flavor-list">
-              <li data-flavor="biscoff">Biscoff</li>
-              <li data-flavor="strawberry-crunch">Strawberry Crunch</li>
-              <li data-flavor="banana-pudding">Banana Pudding</li>
-              <li data-flavor="oreo">Oreo</li>
-              <li data-flavor="fruity-pebbles">Fruity Pebbles</li>
-              <li data-flavor="red-velvet">Red Velvet</li>
+            <ul class="tiles tiles--slices">
+              <li class="tile tile--slice" data-flavor="banana-pudding"><img src="assets/img/slice-banana-pudding.webp" width="128" height="233" loading="lazy" alt=""><h4 class="tile__name">Banana Pudding</h4></li>
+              <li class="tile tile--slice" data-flavor="fruity-pebbles"><img src="assets/img/slice-fruity-pebbles.webp" width="135" height="233" loading="lazy" alt=""><h4 class="tile__name">Fruity Pebbles</h4></li>
+              <li class="tile tile--slice" data-flavor="red-velvet"><img src="assets/img/slice-red-velvet.webp" width="137" height="213" loading="lazy" alt=""><h4 class="tile__name">Red Velvet</h4></li>
+              <li class="tile tile--slice" data-flavor="oreo"><img src="assets/img/slice-oreo.webp" width="140" height="246" loading="lazy" alt=""><h4 class="tile__name">Oreo</h4></li>
+              <li class="tile tile--slice" data-flavor="strawberry-crunch"><img src="assets/img/slice-strawberry-crunch.webp" width="136" height="250" loading="lazy" alt=""><h4 class="tile__name">Strawberry Crunch</h4></li>
+              <li class="tile tile--slice" data-flavor="biscoff"><img src="assets/img/slice-biscoff.webp" width="138" height="234" loading="lazy" alt=""><h4 class="tile__name">Biscoff</h4></li>
             </ul>
           </article>
 
           <article class="item item--cookies" data-item="Cookies">
             <div class="item__top">
               <div>
-                <p class="item__tag">Chunky and stuffed</p>
-                <h3 class="item__name">Cookies</h3>
+                <p class="item__tag">Chunky, moist and delicious</p>
+                <h3 class="item__name">Gourmet Cookies</h3>
               </div>
               <span class="burst" aria-label="$4"><span class="burst__price">$4</span></span>
             </div>
-            <p class="item__desc">Twelve flavors. Tap a cookie to see what's in it.</p>
-            <ul class="shelf" aria-label="Cookie photos">
+            <p class="item__desc">Tap a cookie to see what's in it.</p>
+            <ul class="shelf" aria-label="Cookies">
+              <li><button class="cookie" type="button" aria-pressed="false" data-flavor="banana-pudding">
+                <span class="cookie__face"><img src="assets/img/cookie-banana-pudding.webp" width="560" height="554" loading="lazy" alt=""></span>
+                <span class="cookie__back">Banana pudding flavored, filled with wafer cookies, white chocolate chips and secret drizzle sauce</span>
+                <span class="cookie__name">Banana Pudding</span>
+              </button></li>
+              <li><button class="cookie" type="button" aria-pressed="false">
+                <span class="cookie__face"><img src="assets/img/cookie-bday-cake.webp" width="155" height="144" loading="lazy" alt=""></span>
+                <span class="cookie__back">Confetti and sprinkles</span>
+                <span class="cookie__name">Bday Cake</span>
+              </button></li>
               <li><button class="cookie" type="button" aria-pressed="false" data-flavor="biscoff">
                 <span class="cookie__face"><img src="assets/img/cookie-biscoff.webp" width="330" height="294" loading="lazy" alt=""></span>
-                <span class="cookie__back">Biscoff cookie butter, white chocolate chips, Biscoff cookies, cookie butter drizzle</span>
+                <span class="cookie__back">A thick cookie filled with Biscoff cookie butter and white chocolate chips, drizzled in cookie butter</span>
                 <span class="cookie__name">Biscoff</span>
+              </button></li>
+              <li><button class="cookie" type="button" aria-pressed="false">
+                <span class="cookie__face"><img src="assets/img/cookie-chocolate-chip.webp" width="148" height="137" loading="lazy" alt=""></span>
+                <span class="cookie__back">Thick, chunky milk chocolate chip cookie</span>
+                <span class="cookie__name">Chocolate Chip</span>
+              </button></li>
+              <li><button class="cookie" type="button" aria-pressed="false">
+                <span class="cookie__face"><img src="assets/img/cookie-macadamia.webp" width="144" height="145" loading="lazy" alt=""></span>
+                <span class="cookie__back">White chocolate chips and macadamia nuts</span>
+                <span class="cookie__name">Macadamia</span>
+              </button></li>
+              <li><button class="cookie" type="button" aria-pressed="false">
+                <span class="cookie__face"><img src="assets/img/cookie-mm-peanut-butter.webp" width="145" height="145" loading="lazy" alt=""></span>
+                <span class="cookie__back">Peanut butter cookie stuffed with Reese's peanut butter chips and Reese's Pieces</span>
+                <span class="cookie__name">M&amp;M Peanut Butter</span>
               </button></li>
               <li><button class="cookie" type="button" aria-pressed="false" data-flavor="oreo">
                 <span class="cookie__face"><img src="assets/img/cookie-oreo.webp" width="560" height="512" loading="lazy" alt=""></span>
-                <span class="cookie__back">Oreos, white chocolate Hershey's, white chocolate chips</span>
+                <span class="cookie__back">Cookies 'n' cream, Oreos, white chocolate Hershey's and white chocolate chips</span>
                 <span class="cookie__name">Oreo</span>
-              </button></li>
-              <li><button class="cookie" type="button" aria-pressed="false" data-flavor="banana-pudding">
-                <span class="cookie__face"><img src="assets/img/cookie-banana-pudding.webp" width="560" height="554" loading="lazy" alt=""></span>
-                <span class="cookie__back">Wafer cookies, white chocolate chips, our secret drizzle</span>
-                <span class="cookie__name">Banana Pudding</span>
               </button></li>
               <li><button class="cookie" type="button" aria-pressed="false" data-flavor="red-velvet">
                 <span class="cookie__face"><img src="assets/img/cookie-red-velvet.webp" width="364" height="361" loading="lazy" alt=""></span>
-                <span class="cookie__back">Red velvet, crushed Oreos, Hershey's Cookies 'n' Creme bar</span>
+                <span class="cookie__back">Red velvet cookie, crushed Oreos, Hershey's and a Cookies 'n' Creme bar</span>
                 <span class="cookie__name">Red Velvet</span>
               </button></li>
               <li><button class="cookie" type="button" aria-pressed="false">
-                <span class="cookie__face"><img src="assets/img/cookie-strawberry-nana.webp" width="560" height="559" loading="lazy" alt=""></span>
-                <span class="cookie__back">Half strawberry, half banana pudding, wafer cookies, secret drizzle</span>
-                <span class="cookie__name">Strawberry Nana</span>
-              </button></li>
-              <li><button class="cookie" type="button" aria-pressed="false">
                 <span class="cookie__face"><img src="assets/img/cookie-smores.webp" width="315" height="326" loading="lazy" alt=""></span>
-                <span class="cookie__back">Milk chocolate chips, graham cracker, marshmallows, a Hershey's bar</span>
+                <span class="cookie__back">Milk chocolate chips, graham cracker, marshmallows and a Hershey's bar</span>
                 <span class="cookie__name">S'mores</span>
               </button></li>
-            </ul>
-            <p class="item__sub">All twelve</p>
-            <ul class="flavor-list flavor-list--cols">
-              <li data-flavor="biscoff">Biscoff</li>
-              <li>S'mores</li>
-              <li data-flavor="oreo">Oreo</li>
-              <li>Chocolate Chip</li>
-              <li data-flavor="red-velvet">Red Velvet</li>
-              <li data-flavor="strawberry-crunch">Strawberry Crunch</li>
-              <li>Strawberry Nana</li>
-              <li data-flavor="banana-pudding">Banana Pudding</li>
-              <li>Macadamia</li>
-              <li>M&amp;M Peanut Butter</li>
-              <li>Lemon</li>
-              <li>Cookie Monster</li>
+              <li><button class="cookie" type="button" aria-pressed="false" data-flavor="strawberry-crunch">
+                <span class="cookie__face"><img src="assets/img/cookie-strawberry-crunch.webp" width="163" height="146" loading="lazy" alt=""></span>
+                <span class="cookie__back">Strawberry cookie, strawberry crunch topping and secret drizzle sauce</span>
+                <span class="cookie__name">Strawberry Crunch</span>
+              </button></li>
+              <li><button class="cookie" type="button" aria-pressed="false">
+                <span class="cookie__face"><img src="assets/img/cookie-strawberry-nana.webp" width="560" height="559" loading="lazy" alt=""></span>
+                <span class="cookie__back">Half strawberry cookie, half banana pudding cookie, filled with wafer cookies and secret drizzle sauce</span>
+                <span class="cookie__name">Strawberry Nana</span>
+              </button></li>
+              <li class="shelf__more">
+                <span class="shelf__more-disc">Also on the truck menu: <b>Lemon</b> and <b>Cookie Monster</b></span>
+              </li>
             </ul>
           </article>
 
@@ -276,8 +327,8 @@
             </div>
             <ul class="specials">
               <li><span>Candied Grapes</span><span class="specials__price">$15</span></li>
-              <li><span>Chocolate Covered Strawberries</span><span class="specials__price">$10</span></li>
               <li><span>Churro Cheesecake</span><span class="specials__price">$12 to $15</span></li>
+              <li><span>Chocolate Covered Strawberries</span><span class="specials__price">$10</span></li>
               <li><span>Stuffed Cheesecake Strawberries</span><span class="specials__price">$12</span></li>
               <li><span>Cupcakes</span><span class="specials__price">$4</span></li>
               <li><span>Build Your Own Ice Cream</span><span class="specials__price">$6</span></li>
@@ -286,24 +337,58 @@
           </article>
         </div>
 
+        <div class="boards">
+          <div class="boards__head">
+            <h3 class="h3">Menu boards from the truck</h3>
+            <p>Tap one to see it full size.</p>
+          </div>
+          <ul class="boards__list">
+            <li><button class="board" type="button" data-board-open="0"><img src="assets/img/board-menu-thumb.webp" width="320" height="400" loading="lazy" alt=""><span>Treats Menu</span></button></li>
+            <li><button class="board" type="button" data-board-open="1"><img src="assets/img/board-cups-thumb.webp" width="320" height="400" loading="lazy" alt=""><span>Cups or Cones</span></button></li>
+            <li><button class="board" type="button" data-board-open="2"><img src="assets/img/board-slices-thumb.webp" width="320" height="400" loading="lazy" alt=""><span>Dipped Slices</span></button></li>
+            <li><button class="board" type="button" data-board-open="3"><img src="assets/img/board-cookies-thumb.webp" width="320" height="400" loading="lazy" alt=""><span>Gourmet Cookies</span></button></li>
+            <li><button class="board" type="button" data-board-open="4"><img src="assets/img/board-specialty-thumb.webp" width="320" height="400" loading="lazy" alt=""><span>Specialty Items</span></button></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="about" id="about" aria-labelledby="about-title">
+      <div class="wrap about__grid">
+        <figure class="about__photo" data-tilt>
+          <span class="about__backer" aria-hidden="true"></span>
+          <img src="assets/img/jay-headshot.webp" width="760" height="950" loading="lazy" alt="Jayla, owner of Treats Dipped by Jay, smiling in a pink blazer and holding up an Oreo cookie">
+        </figure>
+        <div class="about__copy">
+          <p class="eyebrow eyebrow--spaced">About the owner</p>
+          <h2 class="h2" id="about-title">Hi guys, my name is Jayla!</h2>
+          <p class="about__role">Owner of Treats Dipped by Jay</p>
+          <div class="about__text">
+            <p>I'm a 20 year old, thriving college student and young entrepreneur.</p>
+            <p>My business specializes in desserts, offering an exquisite array of indulgent treats. I've been in business 3 years, retaining a good customer base selling my desserts in the Houston area. Now the time has come to share with the world.</p>
+            <p class="about__kicker">If you haven't got dippedbyjay, what are you doing??????</p>
+          </div>
+          <p class="about__follow">Follow our social medias</p>
+          <ul class="about__socials">
+            <li><a href="https://www.instagram.com/treatsdippedbyjay/" target="_blank" rel="noopener"><span>Instagram</span> @treatsdippedbyjay</a></li>
+            <li><a href="https://www.tiktok.com/@treatsdippedbyjay" target="_blank" rel="noopener"><span>TikTok</span> @treatsdippedbyjay</a></li>
+            <li><a href="https://www.pinterest.com/treatsdippedbyjay/" target="_blank" rel="noopener"><span>Pinterest</span> @treatsdippedbyjay</a></li>
+          </ul>
+        </div>
       </div>
     </section>
 
     <section class="videos" id="videos" aria-labelledby="videos-title">
-      <div class="wrap videos__grid">
-        <div class="videos__intro">
-          <p class="eyebrow eyebrow--spaced">Made on the truck</p>
-          <h2 class="h2" id="videos-title">Meet Jay</h2>
-          <p class="lead">Jayla Stanford, Jay to her regulars, started selling her desserts around Houston while studying at Prairie View A&amp;M. In 2025 she put them on wheels: a pink truck that pulls up Friday to Sunday with cheesecake by the cup, the slice and the cone.</p>
-          <p class="videos__note">Videos play muted with captions. Tap <b>Sound</b> to hear Jay.</p>
-          <figure class="loaf">
-            <img src="assets/img/loaf-strawberry.webp" width="960" height="1200" loading="lazy" alt="Strawberry loaf cakes in foil pans, topped with buttercream, strawberry crunch and fresh strawberry halves">
-            <figcaption>Strawberry crunch loaf cakes</figcaption>
-          </figure>
-        </div>
-
+      <div class="wrap">
+        <header class="videos__head">
+          <div class="videos__intro">
+            <p class="eyebrow eyebrow--spaced">Made on the truck</p>
+            <h2 class="h2" id="videos-title">Straight from the truck</h2>
+          </div>
+          <p class="videos__note">Videos play muted with captions while they're on screen. Tap <b>Sound</b> to hear Jay.</p>
+        </header>
         <div class="clips">
-          <figure class="clip clip--left" data-clip>
+          <figure class="clip" data-clip style="--i:0">
             <div class="clip__phone">
               <video muted playsinline loop preload="none" poster="assets/img/poster-apple-salad.webp" width="540" height="960" aria-label="Jay shows an apple salad loaded with caramel, cheesecake and candy">
                 <source src="assets/video/apple-salad.mp4" type="video/mp4">
@@ -322,8 +407,45 @@
             </div>
             <figcaption><b>Apple salad, loaded down.</b> Caramel apple cheesecake, Snickers and sweets. $13 on the menu.</figcaption>
           </figure>
-
-          <figure class="clip clip--right" data-clip>
+          <figure class="clip" data-clip style="--i:1">
+            <div class="clip__phone">
+              <video muted playsinline loop preload="none" poster="assets/img/poster-banana-pudding.webp" width="540" height="960" aria-label="Jay shows a banana pudding cookie, cup and cone">
+                <source src="assets/video/banana-pudding.mp4" type="video/mp4">
+                <track kind="captions" src="assets/captions/banana-pudding.vtt" srclang="en" label="English" default>
+              </video>
+              <div class="clip__controls">
+                <button class="clip__btn" type="button" data-clip-play aria-label="Play video">
+                  <svg class="i-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg>
+                  <svg class="i-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+                </button>
+                <button class="clip__btn clip__btn--text" type="button" data-clip-sound aria-pressed="false">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.5h3.5L12 6v12l-4.5-3.5H4z"/><path class="wave" d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/><path class="mute" d="M16 9.5l5 5M21 9.5l-5 5"/></svg>
+                  <span>Sound</span>
+                </button>
+              </div>
+            </div>
+            <figcaption><b>Banana pudding, three ways.</b> As a cookie, a cheesecake cup or a cone.</figcaption>
+          </figure>
+          <figure class="clip" data-clip style="--i:2">
+            <div class="clip__phone">
+              <video muted playsinline loop preload="none" poster="assets/img/poster-million-dollar-cookies.webp" width="540" height="960" aria-label="Jay breaks open a Biscoff, a chocolate chip and an Oreo cookie">
+                <source src="assets/video/million-dollar-cookies.mp4" type="video/mp4">
+                <track kind="captions" src="assets/captions/million-dollar-cookies.vtt" srclang="en" label="English" default>
+              </video>
+              <div class="clip__controls">
+                <button class="clip__btn" type="button" data-clip-play aria-label="Play video">
+                  <svg class="i-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg>
+                  <svg class="i-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+                </button>
+                <button class="clip__btn clip__btn--text" type="button" data-clip-sound aria-pressed="false">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.5h3.5L12 6v12l-4.5-3.5H4z"/><path class="wave" d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/><path class="mute" d="M16 9.5l5 5M21 9.5l-5 5"/></svg>
+                  <span>Sound</span>
+                </button>
+              </div>
+            </div>
+            <figcaption><b>Million dollar cookies.</b> Biscoff, chocolate chip and Oreo, broken open.</figcaption>
+          </figure>
+          <figure class="clip" data-clip style="--i:3">
             <div class="clip__phone">
               <video muted playsinline loop preload="none" poster="assets/img/poster-loaf-cakes.webp" width="540" height="960" aria-label="Jay walks through five loaf cakes on the truck">
                 <source src="assets/video/loaf-cakes.mp4" type="video/mp4">
@@ -345,6 +467,7 @@
         </div>
       </div>
     </section>
+
 
     <section class="reviews" id="reviews" aria-labelledby="reviews-title">
       <div class="wrap reviews__head">
@@ -409,10 +532,13 @@
             <p>Want Jay at your party, campus event or pop-up shop? Send a message on Instagram with the date, the place and how many people you're feeding.</p>
             <a class="text-link" href="https://ig.me/m/treatsdippedbyjay" target="_blank" rel="noopener">Message Jay on Instagram <span aria-hidden="true">↗</span></a>
           </div>
-          <div class="card">
-            <h3 class="h3">Cookies by mail</h3>
-            <p>Chunky cookies, loaf cakes, crunch crumbs and Jay's recipes ship by USPS from the online shop.</p>
-            <a class="text-link" href="https://treatsdippedbyjay.com/collections/all" target="_blank" rel="noopener">Visit the online shop <span aria-hidden="true">↗</span></a>
+          <div class="card card--mail">
+            <img src="assets/img/loaf-strawberry.webp" width="960" height="1200" loading="lazy" alt="Strawberry crunch loaf cakes topped with buttercream and fresh strawberry halves">
+            <div>
+              <h3 class="h3">Cookies by mail</h3>
+              <p>Chunky cookies, loaf cakes, crunch crumbs and Jay's recipes ship by USPS from the online shop.</p>
+              <a class="text-link" href="https://treatsdippedbyjay.com/collections/all" target="_blank" rel="noopener">Visit the online shop <span aria-hidden="true">↗</span></a>
+            </div>
           </div>
         </div>
       </div>
@@ -434,8 +560,8 @@
         <p><a href="https://www.instagram.com/treatsdippedbyjay/" target="_blank" rel="noopener">Instagram</a><br><a href="https://www.tiktok.com/@treatsdippedbyjay" target="_blank" rel="noopener">TikTok</a><br><a href="https://linktr.ee/treatsdippedbyjay" target="_blank" rel="noopener">All links</a></p>
       </div>
       <div class="footer__col">
-        <p class="footer__label">Menu</p>
-        <p><a href="#menu">Cheesecake cups</a><br><a href="#menu">Dipped slices</a><br><a href="#menu">Cookies</a></p>
+        <p class="footer__label">On this page</p>
+        <p><a href="#menu">The menu</a><br><a href="#about">About the owner</a><br><a href="#videos">Videos</a></p>
       </div>
     </div>
     <div class="wrap footer__fine">
@@ -454,7 +580,15 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
     </button>
     <img data-lightbox-img src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="">
-    <p class="lightbox__cap" data-lightbox-cap></p>
+    <div class="lightbox__bar">
+      <button class="lightbox__nav" type="button" data-lightbox-prev aria-label="Previous board">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+      </button>
+      <p class="lightbox__cap" data-lightbox-cap></p>
+      <button class="lightbox__nav" type="button" data-lightbox-next aria-label="Next board">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+      </button>
+    </div>
   </dialog>
 
   <script src="assets/reviews.js"></script>

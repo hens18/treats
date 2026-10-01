@@ -6,14 +6,16 @@ Their current site, https://treatsdippedbyjay.com/, is a Shopify shop for shippe
 Brief from the client: use the store info, hours, menu and title supplied (logo, Instagram screenshot, printed menu, two
 videos), add a reviews section people can interact with while it scrolls right to left (as on `hens18/hwest`,
 `hens18/bakery`, `hens18/kanji`), be creative with the palette but keep it user friendly and fast, use 3D graphics where
-they fit, and flag design concerns. Four more photos are coming after the first pass.
+they fit, and flag design concerns. Second pass: the four menu boards (cups or cones, dipped slices, $4 cookies,
+specialty items) for the menu, an "About the owner" section using the headshot from the shop's homepage banner with her
+About text beside it, and two more videos.
 
 ## Previews
 
 - `node scripts/build-preview.js` writes `.preview/index.html` (CSS, JS and images inlined) and copies the videos,
   captions and the 3D bundle next to it in `.preview/assets/`. `--artifact` writes `.preview/live.html` instead.
-- No claude.ai live link for this one: the page carries the business's real name and logo, so it isn't published as an
-  artifact. Share screenshots, or the GitHub Pages URL once deployed.
+- No claude.ai live link for this one: the page carries the business's real name, logo and the owner's photo, so it
+  isn't published as an artifact (the client asked; this was explained). Share screenshots or the `.preview` folder.
 
 ## Business facts (sources)
 
@@ -29,7 +31,7 @@ they fit, and flag design concerns. Four more photos are coming after the first 
 - Allergy text is from the Shopify FAQ ("May contain traces of peanuts, nuts, and egg. May contain gluten, milk, soy,
   wheat, and barley." plus "inform us of any allergies").
 
-## Menu (from the printed menu, `site/assets/img/printed-menu.webp`)
+## Menu (printed menu `board-menu.webp` plus the four boards `board-cups/slices/cookies/specialty.webp`)
 
 - Bestsellers: Strawberry Cheesecake Cups, Cheesecake Cups, Banana Pudding.
 - Cheesecake Cups $12 (cone $13): Biscoff, Strawberry Crunch, Banana Pudding, Oreo, Fruity Pebbles, Graham Cracker,
@@ -39,13 +41,25 @@ they fit, and flag design concerns. Four more photos are coming after the first 
 - Specialty (prices read from the small starbursts, zoomed): Candied Grapes $15, Chocolate Covered Strawberries $10,
   Churro Cheesecake $12 to $15, Stuffed Cheesecake Strawberries $12, Cupcakes $4, Build Your Own Ice Cream $6,
   Apple Salad $13, Dipped Apple Slices $12 (Biscoff, Strawberry Crunch, Banana Pudding, Oreo, Fruity Pebbles).
-- The flavor chips in the menu filter by `data-flavor` on list items; cards carry `data-item` for the summary line.
-- Cookie flip-side text comes from the Shopify product descriptions (lightly cleaned; "Cookies N Creak" read as
-  Hershey's Cookies 'n' Creme).
+- The boards agree with the printed menu on prices. Cups board: $12, cones +$1, five flavors with descriptions
+  (Biscoff, Fruity Pebbles, Oreo, Banana Pudding, Strawberry Crunch); Graham Cracker and Caramel Apple Pecan are only on
+  the printed menu, shown as "Also". Slices board: same six flavors. Cookies board: 11 cookies with descriptions,
+  including Bday Cake (not on the printed menu); Lemon and Cookie Monster are only on the printed menu ("Also" disc).
+  Specialty board: same items and prices; the site uses its order.
+- Product photos (`cup-*`, `cone-*`, `slice-*`, and cookies bday-cake, chocolate-chip, macadamia, mm-peanut-butter,
+  strawberry-crunch) are cut out of the boards with rembg (isnet-general-use), at the boards' own size (about
+  150x220). Oreo, banana pudding, Biscoff, red velvet, S'mores and Strawberry Nana keep the sharper Shopify shots.
+  Higher-resolution originals from the client would sharpen the cups, cones and slices.
+- The flavor chips filter by `data-flavor` on tiles, cookies and list items; cards carry `data-item` for the summary
+  line. The Cup / Cone switch sets `data-shape` on the cups card and every tile turns over in 3D.
+- Cookie flip-side text is the cookies board's descriptions, lightly cleaned ("&" to "and", no exclamation marks).
+- "Menu boards from the truck" opens the five boards in the lightbox as a gallery (arrows, keys, swipe).
 
 ## NEEDS OWNER CONFIRMATION
 
-- Reviews: none were attached to the brief (see Reviews below).
+- Reviews: none attached yet; the client says they're coming (see Reviews below).
+- About text says "20 year old" and "in business 3 years"; Houston Style Magazine said 21 in Aug 2025. Update?
+- Cookie lineup: Bday Cake (board only) vs Lemon and Cookie Monster (printed menu only). Which is current?
 - Hours: the bio says 2 to 8 PM; the loaf cake video says "open today from 3 to 8 PM". Site uses 2 to 8.
 - Loaf cakes: in the video (strawberry, banana pudding, Oreo, Biscoff, red velvet) and on Shopify ($9) but not on the
   printed menu. Only mentioned in the video caption and the "Cookies by mail" card.
@@ -57,6 +71,13 @@ they fit, and flag design concerns. Four more photos are coming after the first 
   treatsdippedbyjay.com/collections/all; if the domain moves to this site, the shop needs another URL or the card goes.
 - Videos: captions transcribed from the audio (Whisper) and cleaned. "Snickers and sweets" and "red velvet"
   (sounds like "red duckie") are best guesses.
+
+## About the owner
+
+- Headshot: cropped from the shop homepage banner ("Sending sweetness around The Globe", the client's screenshot),
+  downloaded full size from treatsdippedbyjay.com/cdn/shop/files (2813x1356), saved as `jay-headshot.webp`.
+- Text: the Shopify "About The Owner" page, word for word except "deserts" to "desserts" and sentence case.
+  Socials as listed there: Instagram, TikTok, Pinterest (Pinterest URL assumed: pinterest.com/treatsdippedbyjay).
 
 ## Reviews
 
@@ -96,17 +117,18 @@ they fit, and flag design concerns. Four more photos are coming after the first 
 
 ## Media
 
-- Videos: client MP4s (1080x1920 VP9, 17 MB and 23 MB) re-encoded to 540x960 H.264 CRF 30, 30 fps, AAC 64k,
-  faststart: `apple-salad.mp4` 3.2 MB, `loaf-cakes.mp4` 4.2 MB. `preload="none"`, posters from frames 8 s and 17.3 s.
-  They play muted with captions (`site/assets/captions/*.vtt`) while half on screen; one has sound at a time.
+- Videos: four client MP4s (VP9, 9 to 23 MB each) re-encoded to 540x960 H.264 CRF 30, 30 fps, AAC 64k, faststart:
+  `apple-salad.mp4` 3.2 MB, `banana-pudding.mp4` 2.9 MB (cookie, cup or cone), `million-dollar-cookies.mp4` 3.2 MB
+  (Biscoff, chocolate chip, Oreo), `loaf-cakes.mp4` 4.2 MB. `preload="none"`, WebP posters. They play muted with
+  captions (`site/assets/captions/*.vtt`, Whisper transcripts, cleaned) while half on screen; one has sound at a time.
 - Cookie cutouts and `loaf-strawberry.webp` are the owner's own product photos from the Shopify store.
-- Waiting on four more photos from the client. Best slots: a cheesecake cup or cone, a dipped slice, the truck itself,
-  and the specialty strawberries. Menu cards can take a photo above `.item__top`.
+- Still useful from the client: a photo of the truck itself and of the specialty strawberries.
 
 ## Layout
 
-- `site/index.html` + `site/assets/`: plain HTML/CSS/vanilla JS. `site.css` tokens and sections, `reviews.css` /
-  `reviews.js` the belt, `main.js` nav, hours, 3D loader, videos, flavor filter, cookie flip, lightbox.
+- `site/index.html` + `site/assets/`: plain HTML/CSS/vanilla JS. Sections: hero, facts, menu (+ boards), about,
+  videos, reviews, find the truck. `site.css` tokens and sections, `reviews.css` / `reviews.js` the belt, `main.js`
+  nav, hours, 3D loader, videos, flavor filter, cup/cone switch, cookie flip, headshot tilt, boards gallery.
 - Deploy: GitHub Pages via `.github/workflows/pages.yml`, which publishes `site/` on every push to `main` (or by hand from
   the Actions tab). Settings > Pages > Source must be "GitHub Actions". Patch the `DEPLOY STEP` comment (og:url,
   og:image) once the domain exists.
