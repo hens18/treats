@@ -14,8 +14,7 @@ About text beside it, and two more videos.
 
 - `node scripts/build-preview.js` writes `.preview/index.html` (CSS, JS and images inlined) and copies the videos,
   captions and the 3D bundle next to it in `.preview/assets/`. `--artifact` writes `.preview/live.html` instead.
-- No claude.ai live link for this one: the page carries the business's real name, logo and the owner's photo, so it
-  isn't published as an artifact (the client asked; this was explained). Share screenshots or the `.preview` folder.
+- The live link is the GitHub Pages site (see Layout > Deploy), not a claude.ai artifact.
 
 ## Business facts (sources)
 
@@ -130,5 +129,7 @@ About text beside it, and two more videos.
   videos, reviews, find the truck. `site.css` tokens and sections, `reviews.css` / `reviews.js` the belt, `main.js`
   nav, hours, 3D loader, videos, flavor filter, cup/cone switch, cookie flip, headshot tilt, boards gallery.
 - Deploy: GitHub Pages via `.github/workflows/pages.yml`, which publishes `site/` on every push to `main` (or by hand from
-  the Actions tab). Settings > Pages > Source must be "GitHub Actions". Patch the `DEPLOY STEP` comment (og:url,
-  og:image) once the domain exists.
+  the Actions tab). `main` was created from the work branch at the client's request (Oct 1 2026). One-time settings:
+  Settings > General > Default branch = `main`, then Settings > Pages > Source = "GitHub Actions". Live URL:
+  https://hens18.github.io/treats/. og:url / og:image (`og.jpg`, a 1200x630 capture of the hero) point there; change
+  them under the `DEPLOY STEP` comment if the site moves to treatsdippedbyjay.com.
